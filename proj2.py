@@ -11,6 +11,6 @@ from sklearn.linear_model import LogisticRegression
 
 data = pd.read_csv("data.csv")
 dataset = pd.DataFrame(data = data)
-# print(X)
+print(X)
 
 
