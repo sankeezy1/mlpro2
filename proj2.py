@@ -6,12 +6,11 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
 
 data = pd.read_csv("data.csv")
 dataset = pd.DataFrame(data = data)
+# print(X)
 
-plt.plot(dataset["yards"], dataset["success"], 'ro')
-plt.ylabel('Goal Success')
-plt.xlabel('Yards')
-plt.show()
 
