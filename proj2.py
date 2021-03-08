@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
@@ -49,7 +50,7 @@ print('kNN Classification report : \n', report)
 k_range = range(1, 100)
 scores = []
 for k in k_range:
-    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev')
+    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'minkowski', p = 2)
     knn.fit(X_train, y_train)
     scores.append(knn.score(X_test, y_test))
 
@@ -109,10 +110,10 @@ print('Logistic classification report : \n',report)
 # Linear SVC model
 # Regularization parameter 1,000 and max iterations at max possible
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
-scaler = RobustScaler()
-X_train = scaler.fit(X_train).transform(X_train)
-X_test = scaler.fit(X_test).transform(X_test)
-lsvc = LinearSVC(C = 100, max_iter = 10000)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+lsvc = LinearSVC(C = 100, max_iter = 10000, dual = False)
 lsvc.fit(X_train, y_train)
 
 # Display SVC scores
@@ -131,4 +132,4 @@ report = classification_report(y_test, y_pred)
 print('Linear SVC classification report : \n',report)
 
 # Print plots
-plt.show()
+# plt.show()
