@@ -32,18 +32,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
 knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
-preds = knn.predict(X_test)
 
 # Display kNN scores
 print("kNN training set score: {:.2f}%".format(knn.score(X_train, y_train)))
 print("kNN test set score: {:.2f}%".format(knn.score(X_test, y_test)))
 
 # kNN confusion matrix
-matrix = confusion_matrix(y_test, preds)
+y_pred = knn.predict(X_test)
+matrix = confusion_matrix(y_test, y_pred)
 print('kNN Confusion matrix : \n',matrix)
 
 # kNN classification report
-report = classification_report(y_test, preds)
+report = classification_report(y_test, y_pred)
 print('kNN Classification report : \n', report)
 
 # Showing accuracy according to n_neighbors from 0 to 20
