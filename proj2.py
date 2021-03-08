@@ -46,7 +46,7 @@ print('kNN Confusion matrix : \n',matrix)
 report = classification_report(y_test, y_pred)
 print('kNN Classification report : \n', report)
 
-# Showing accuracy according to n_neighbors from 0 to 20
+# Showing accuracy according to n_neighbors from 0 to 100
 k_range = range(1, 100)
 scores = []
 for k in k_range:
@@ -109,7 +109,7 @@ print('Logistic classification report : \n',report)
 
 # Linear SVC model
 # Regularization parameter 1,000 and max iterations at max possible
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .35)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
@@ -119,6 +119,9 @@ lsvc.fit(X_train, y_train)
 # Display SVC scores
 print("Linear SVC Training set score: {:.2f}%".format(100 * lsvc.score(X_train, y_train)))
 print("Linear SVC Test set score: {:.2f}%".format(100 * lsvc.score(X_test, y_test)))
+
+print(lsvc.coef_)
+print(lsvc.intercept_)
 
 
 
