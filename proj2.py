@@ -1,6 +1,6 @@
 #Machine Learning Project 2
 #   Authors:
-#   Sankarshan Araujo
+#   Sankarshan Araujo, Nick Kucek, Kyle Carino
 #   Logistic regression and SVM
 
 # 3/6/21 KNN model of different wheat seeds
@@ -35,8 +35,8 @@ knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 
 # Display kNN scores
-print("kNN training set score: {:.2f}%".format(knn.score(X_train, y_train)))
-print("kNN test set score: {:.2f}%".format(knn.score(X_test, y_test)))
+print("kNN training set score: {:.2f}%".format(100*knn.score(X_train, y_train)))
+print("kNN test set score: {:.2f}%".format(100*knn.score(X_test, y_test)))
 
 # kNN confusion matrix
 y_pred = knn.predict(X_test)
@@ -84,8 +84,8 @@ lr = LogisticRegression(max_iter = 20000)
 lr.fit(X_train, y_train)
 
 # Display LR scores
-print("Logistic training set score: {:.2f}%".format(lr.score(X_train, y_train)))
-print("Logistic test set score: {:.2f}%".format(lr.score(X_test, y_test)))
+print("Logistic training set score: {:.2f}%".format(100*lr.score(X_train, y_train)))
+print("Logistic test set score: {:.2f}%".format(100*lr.score(X_test, y_test)))
 
 print("Logistic regression coefficient: {}".format(lr.coef_))
 print("Logistic regression intercept: {}".format(lr.intercept_))
@@ -131,7 +131,7 @@ matrix = confusion_matrix(y_test, y_pred)
 print('linear SVC confusion matrix : \n',matrix)
 
 # SVC classification report for precision, recall f1-score and accuracy
-report = classification_report(y_test, y_pred, zero_division = True) # true for when data results in 0 correct predictions
+report = classification_report(y_test, y_pred) # true for when data results in 0 correct predictions
 print('Linear SVC classification report : \n',report)
 
 # nonlinear SVC
@@ -150,7 +150,7 @@ matrix = confusion_matrix(y_test, y_pred)
 print('SVM Gaussian confusion matrix : \n',matrix)
 
 # SVC classification report for precision, recall f1-score and accuracy
-report = classification_report(y_test, y_pred, zero_division = True)
+report = classification_report(y_test, y_pred)
 print('SVM Gaussian classification report : \n',report)
 
 # Print summary
