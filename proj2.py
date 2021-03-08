@@ -113,7 +113,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
-lsvc = LinearSVC(C = 100, max_iter = 20000)
+lsvc = LinearSVC(C = 500, max_iter = 20000)
 lsvc.fit(X_train, y_train)
 
 # Display SVC scores
