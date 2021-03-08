@@ -1,6 +1,6 @@
 #Machine Learning Project 2
 #   Authors:
-#   Sankarshan Araujo, Nick Kucek, Kyle Carino
+#   Sankarshan Araujo, Kyle Carino
 #   Logistic regression and SVM
 
 # 3/6/21 KNN model of different wheat seeds
@@ -30,7 +30,7 @@ y = df["Success"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state = 42)
 
 # kNN set up
-knn = KNeighborsClassifier(n_neighbors = 15, weights = 'distance', metric = 'chebyshev')
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'distance', metric = 'chebyshev', algorithm = 'auto')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 
@@ -51,7 +51,7 @@ print('kNN Classification report : \n', report)
 k_range = range(1, 100)
 scores = []
 for k in k_range:
-    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev')
+    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev', algorithm = 'auto')
     knn.fit(X_train, y_train)
     scores.append(knn.score(X_test, y_test))
 
@@ -115,7 +115,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, rando
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
-lsvc = LinearSVC(max_iter = 50000, class_weight = 'balanced')
+lsvc = LinearSVC(max_iter = 20000, class_weight = 'balanced')
 lsvc.fit(X_train, y_train)
 
 # Display SVC scores
