@@ -27,7 +27,7 @@ X = df[["Yards"]]
 y = df["Success"]
 
 # Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state = 42)
 
 # kNN set up
 knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
@@ -47,7 +47,26 @@ print('kNN Confusion matrix : \n',matrix)
 report = classification_report(y_test, y_pred)
 print('kNN Classification report : \n', report)
 
-# Showing accuracy according to n_neighbors from 0 to 100 using euclidean
+#plot usefulness
+# random_state_range = 0
+# scores = []
+# for i in range(0, 100):
+#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = random_state_range)
+#     knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
+#     knn.fit(X_train, y_train)
+#     scores.append(knn.score(X_test, y_test))
+#     if random_state_range <= 99:
+#         random_state_range = random_state_range + 1
+# print(len(scores))
+# print(random_state_range)
+
+# Plot data
+# plt.figure()
+# plt.xlabel('random_state')
+# plt.ylabel('accuracy')
+# plt.scatter(random_state_range, scores)
+
+# Showing accuracy according to n_neighbors from 0 to 100 using chebyshev
 k_range = range(1, 100)
 scores = []
 for k in k_range:
@@ -64,7 +83,7 @@ plt.xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
 # Showing the training set proportion
 t = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
-knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev')
+knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
 plt.figure()
 for s in t:
     scores = []
@@ -80,7 +99,7 @@ plt.ylabel('accuracy')
 
 # Logistic regression model
 # Max iterations set to highest possible
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = 42)
 lr = LogisticRegression(max_iter = 10000)
 lr.fit(X_train, y_train)
 
@@ -112,7 +131,7 @@ report = classification_report(y_test, y_pred)
 print('Logistic classification report : \n',report)
 
 # Linear SVC model
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = 42)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
