@@ -130,9 +130,9 @@ print('Logistic classification report : \n',report)
 
 # Linear SVC model
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = 42)
-#scaler = StandardScaler()
-#X_train = scaler.fit_transform(X_train)
-#X_test = scaler.transform(X_test)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 lsvc = LinearSVC(C = 100, max_iter = 20000)
 lsvc.fit(X_train, y_train)
 
