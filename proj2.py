@@ -79,7 +79,7 @@ plt.ylabel('accuracy')
 
 # Logistic regression model
 # Max iterations set to highest possible
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
 lr = LogisticRegression(max_iter = 10000)
 lr.fit(X_train, y_train)
 
@@ -109,11 +109,11 @@ print('Logistic classification report : \n',report)
 
 # Linear SVC model
 # Regularization parameter 1,000 and max iterations at max possible
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
-lsvc = LinearSVC(C = 500, max_iter = 20000)
+lsvc = LinearSVC(C = 100, max_iter = 20000)
 lsvc.fit(X_train, y_train)
 
 # Display SVC scores
@@ -128,7 +128,7 @@ matrix = confusion_matrix(y_test, y_pred)
 print('linear SVC confusion matrix : \n',matrix)
 
 # SVC classification report for precision, recall f1-score and accuracy
-report = classification_report(y_test, y_pred)
+report = classification_report(y_test, y_pred, zero_division = True)
 print('Linear SVC classification report : \n',report)
 
 # Print plots
