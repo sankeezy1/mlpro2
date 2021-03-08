@@ -128,7 +128,7 @@ print('linear SVC confusion matrix : \n',matrix)
 
 # SVC classification report for precision, recall f1-score and accuracy
 report = classification_report(y_test, y_pred)
-print('Linear SVC classification report : \n',matrix)
+print('Linear SVC classification report : \n',report)
 
 # Print plots
 plt.show()
