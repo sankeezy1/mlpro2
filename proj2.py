@@ -30,7 +30,7 @@ y = df["Success"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state = 42)
 
 # kNN set up
-knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'distance', metric = 'chebyshev')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 
@@ -81,7 +81,7 @@ plt.xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
 # Showing the training set proportion
 t = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
-knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'distance', metric = 'chebyshev')
 plt.figure()
 for s in t:
     scores = []
@@ -96,17 +96,16 @@ plt.xlabel('Training set proportion (%)')
 plt.ylabel('accuracy')
 
 # Logistic regression model
-# Max iterations set to highest possible
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = 42)
-lr = LogisticRegression(max_iter = 10000)
+lr = LogisticRegression(max_iter = 20000)
 lr.fit(X_train, y_train)
 
 # Display LR scores
 print("Logistic training set score: {:.2f}%".format(lr.score(X_train, y_train)))
 print("Logistic test set score: {:.2f}%".format(lr.score(X_test, y_test)))
 
-print(lr.coef_)
-print(lr.intercept_)
+print("Logistic regression coefficient: {}".format(lr.coef_))
+print("Logistic regression intercept: {}".format(lr.intercept_))
 
 # LR prediction plot
 x_range = 70
@@ -133,15 +132,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, rando
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
-lsvc = LinearSVC(C = 100, max_iter = 20000)
+lsvc = LinearSVC(C = 100, max_iter = 50000, class_weight = 'balanced')
 lsvc.fit(X_train, y_train)
 
 # Display SVC scores
 print("Linear SVC Training set score: {:.2f}%".format(100 * lsvc.score(X_train, y_train)))
 print("Linear SVC Test set score: {:.2f}%".format(100 * lsvc.score(X_test, y_test)))
 
-print(lsvc.coef_)
-print(lsvc.intercept_)
+print("Linear SVC coefficient: {}".format(lsvc.coef_))
+print("Linear SVC: {}".format(lsvc.intercept_))
 
 # SVC confusion matrix
 y_pred = lsvc.predict(X_test)
@@ -153,14 +152,14 @@ report = classification_report(y_test, y_pred, zero_division = True) # true for 
 print('Linear SVC classification report : \n',report)
 
 # nonlinear SVC
-svc = SVC(C = 100, max_iter = 20000)
+svc = SVC(C = 100, class_weight = 'balanced')
 svc.fit(X_train, y_train)
 
 # Display nonlinear SVC scores
 print("SVM Gaussian Training set score: {:.2f}%".format(100*svc.score(X_train, y_train)))
 print("SVM Gaussian Test set score: {:.2f}%".format(100*svc.score(X_test, y_test)))
 
-print("svc.intercept_: {}".format(svc.intercept_))
+print("SVM Gaussian intercept: {}".format(svc.intercept_))
 
 # SVC confusion matrix
 y_pred = svc.predict(X_test)
