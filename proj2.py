@@ -47,23 +47,6 @@ print('kNN Confusion matrix : \n',matrix)
 report = classification_report(y_test, y_pred)
 print('kNN Classification report : \n', report)
 
-# #plot usefulness
-# random_state_range = 0
-# scores = []
-# for i in range(0, 100):
-#     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25, random_state = i)
-#     knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
-#     knn.fit(X_train, y_train)
-#     scores.append(knn.score(X_test, y_test))
-#     if random_state_range <= 99:
-#         random_state_range = random_state_range + 1
-#
-# # Plot data
-# plt.figure()
-# plt.xlabel('random_state')
-# plt.ylabel('accuracy')
-# plt.scatter(random_state_range, scores)
-
 # Showing accuracy according to n_neighbors from 0 to 100 using chebyshev
 k_range = range(1, 100)
 scores = []
