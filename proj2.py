@@ -30,7 +30,7 @@ y = df["Success"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25)
 
 # kNN set up
-knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance')
+knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance', metric = 'chebyshev')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 
@@ -47,11 +47,11 @@ print('kNN Confusion matrix : \n',matrix)
 report = classification_report(y_test, y_pred)
 print('kNN Classification report : \n', report)
 
-# Showing accuracy according to n_neighbors from 0 to 100
+# Showing accuracy according to n_neighbors from 0 to 100 using euclidean
 k_range = range(1, 100)
 scores = []
 for k in k_range:
-    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'minkowski', p = 2)
+    knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev')
     knn.fit(X_train, y_train)
     scores.append(knn.score(X_test, y_test))
 
@@ -64,7 +64,7 @@ plt.xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
 # Showing the training set proportion
 t = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
-knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'minkowski', p = 2)
+knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'chebyshev')
 plt.figure()
 for s in t:
     scores = []
