@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
 from sklearn.preprocessing import RobustScaler
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
@@ -87,6 +88,9 @@ lr.fit(X_train, y_train)
 print("Logistic training set score: {:.2f}%".format(lr.score(X_train, y_train)))
 print("Logistic test set score: {:.2f}%".format(lr.score(X_test, y_test)))
 
+print(lr.coef_)
+print(lr.intercept_)
+
 # LR prediction plot
 x_range = 100
 Xs = [i for i in range(x_range)]
@@ -108,8 +112,8 @@ report = classification_report(y_test, y_pred)
 print('Logistic classification report : \n',report)
 
 # Linear SVC model
-# Regularization parameter 1,000 and max iterations at max possible
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .5)
+# Regularization parameter at default and max iterations at max possible
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
@@ -123,16 +127,33 @@ print("Linear SVC Test set score: {:.2f}%".format(100 * lsvc.score(X_test, y_tes
 print(lsvc.coef_)
 print(lsvc.intercept_)
 
-
-
 # SVC confusion matrix
 y_pred = lsvc.predict(X_test)
 matrix = confusion_matrix(y_test, y_pred)
 print('linear SVC confusion matrix : \n',matrix)
 
 # SVC classification report for precision, recall f1-score and accuracy
-report = classification_report(y_test, y_pred, zero_division = True)
+report = classification_report(y_test, y_pred, zero_division = True) # true for when data results in 0 correct predictions
 print('Linear SVC classification report : \n',report)
+
+# nonlinear SVC
+svc = SVC(C=10, gamma='auto')
+svc.fit(X_train, y_train)
+
+# Display nonlinear SVC scores
+print("SVM Gaussian Training set score: {:.2f}%".format(100*svc.score(X_train, y_train)))
+print("SVM Gaussian Test set score: {:.2f}%".format(100*svc.score(X_test, y_test)))
+
+print("svc.intercept_: {}".format(svc.intercept_))
+
+# SVC confusion matrix
+y_pred = svc.predict(X_test)
+matrix = confusion_matrix(y_test, y_pred)
+print('SVM Gaussian confusion matrix : \n',matrix)
+
+# SVC classification report for precision, recall f1-score and accuracy
+report = classification_report(y_test, y_pred, zero_division = True)
+print('SVM Gaussian classification report : \n',report)
 
 # Print summary
 print(df.describe())
