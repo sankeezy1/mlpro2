@@ -19,7 +19,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
-
 data = pd.read_csv('data.csv')
 
 X = data[['Yards',]]
@@ -27,7 +26,7 @@ y = data['Success']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, test_size=.25)
 df = pd.DataFrame(data = data)
 #kNN set up
-knn = KNeighborsClassifier(n_neighbors = k, weights = 'distance', metric = 'minkowski', p = 2)
+knn = KNeighborsClassifier(n_neighbors = 5, weights = 'distance')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 actual = [0,0,0]
