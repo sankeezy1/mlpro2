@@ -92,7 +92,7 @@ print(lr.coef_)
 print(lr.intercept_)
 
 # LR prediction plot
-x_range = 100
+x_range = 70
 Xs = [i for i in range(x_range)]
 Ys = [lr.predict_proba([[value]])[0][1] for value in range(x_range)]
 
@@ -100,7 +100,7 @@ plt.figure()
 plt.scatter(X, y)
 plt.xlabel('Yards')
 plt.ylabel('Probability')
-plt.plot(Xs, Ys, color='red')
+plt.plot(Xs, Ys, color = 'green')
 
 # LR confusion matrix
 y_pred = lr.predict(X_test)
@@ -112,7 +112,6 @@ report = classification_report(y_test, y_pred)
 print('Logistic classification report : \n',report)
 
 # Linear SVC model
-# Regularization parameter at default and max iterations at max possible
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .25)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
@@ -159,4 +158,4 @@ print('SVM Gaussian classification report : \n',report)
 print(df.describe())
 
 # Print plots
-# plt.show()
+plt.show()
