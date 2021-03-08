@@ -26,7 +26,7 @@ y = data['Success']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, test_size=.25)
 df = pd.DataFrame(data = data)
 #kNN set up
-knn = KNeighborsClassifier(n_neighbors = 5, weights = 'distance')
+knn = KNeighborsClassifier(n_neighbors = 7, weights = 'distance')
 knn.fit(X_train, y_train)
 knn.score(X_test, y_test)
 actual = [0,0,0]
